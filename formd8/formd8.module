@@ -1,0 +1,14 @@
+<?php
+
+function formd8_form_alter(&$form, &$form_state, $form_id) {
+    if($form_id == 'subscribe_form') {  
+        $form['birth_date']['#states'] = [
+          'visible' => [
+              'select[name="gender"]' => ['value' => 'Male']
+          ],
+          'required' => [
+              'select[name="gender"]' => ['value' => 'Male']
+          ],
+        ];
+    }
+}

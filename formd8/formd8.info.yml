@@ -1,0 +1,6 @@
+name: Formd8
+type: module
+description: 'Drupal8 Form API.'
+package: Awesome modules
+version: 1.0
+core: '8.x'

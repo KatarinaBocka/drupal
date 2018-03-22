@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies: {  }
+name: custom_style
+label: 'Custom style'
+effects:
+  e0d2d519-d5b8-4ef2-96c1-f48350a1e962:
+    uuid: e0d2d519-d5b8-4ef2-96c1-f48350a1e962
+    id: image_desaturate
+    weight: 1
+    data: {  }
+  e29b73c2-990d-4a3f-b345-4aa6838df166:
+    uuid: e29b73c2-990d-4a3f-b345-4aa6838df166
+    id: image_scale_and_crop
+    weight: 2
+    data:
+      width: 150
+      height: 150
