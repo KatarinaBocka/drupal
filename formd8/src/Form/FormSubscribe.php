@@ -9,6 +9,7 @@ use Drupal\Core\Ajax\CssCommand;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\node\Entity\Node;
 use Drupal\file\Entity\File;
+use Drupal\image\Entity\ImageStyle;
 
 class FormSubscribe extends FormBase {
     public function getFormId() {
@@ -28,7 +29,23 @@ class FormSubscribe extends FormBase {
      */
 
     public function buildForm(array $form, FormStateInterface $form_state) {
+
+        $form['test']=array(
+            '#markup' => '<img src="sites/default/files/logo.png">',
+            '#theme' => 'image_style',
+            '#style_name' => 'custom_style',
+            '#uri' => 'public://logo.png',
+        );
+
+        // $path = 'public://logo.png';
+        // $url = ImageStyle::load('style_name')->buildUrl($path);
         
+        // $render = [
+        //     '#theme' => 'image_style',
+        //     '#style_name' => 'thumbnail',
+        //     '#uri' => 'public://logo.png',
+        // ];
+
         $form['first_name']=array(
             '#type' => 'textfield',
             '#title' => $this->t('First Name'),
@@ -315,6 +332,12 @@ class FormSubscribe extends FormBase {
         
         /* Set the status flag permanent of the file object */
            $file->setPermanent();
+
+        // Load the image style configuration entity.
+        
+            $style = ImageStyle::load('custom_style');
+            $uri = $style->buildUri($image);
+            $url = $style->buildUrl($image);   
         
         /* Save the file in database */
            $file->save();
@@ -342,14 +365,23 @@ class FormSubscribe extends FormBase {
             ],
             
             'field_image' => [
-                            'target_id' => $file->id(),
+                              'target_id' => $file->id(),
                               'alt' => "My 'alt'",
                               'title' => "My 'title'",
+                              '#theme' => 'image_style',
+                              '#style_name' => 'custom_style',
                              ],
             ]);
+
+            // $render = [
+            //     '#theme' => 'image_style',
+            //     '#style_name' => 'thumbnail',
+            //     '#uri' => 'public://sites/default/files/logo.png',
+            //     // optional parameters
+            // ];
            
             $node->save();
-               \Drupal::service('path.alias_storage')->save('/node/' . $node->id(), '/my-path', 'en');
+               \Drupal::service('path.alias_storage')->save('/node/' . $node->id(), 'en');
        
     
     }
