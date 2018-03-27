@@ -1,0 +1,12 @@
+{# {{ node.content }}
+<hr> #}
+{# {{ content }} #}
+{% set image = content.field_logo_form.0 %}
+
+{% set image = image|merge({'#image_style': 'mycustom_style'}) %}
+
+
+
+{{ content.title }}
+{{ content.field_logo_form }}
+{{ content.body }}
